@@ -19,117 +19,78 @@ public class Main : SEScene
     String text3;
     String text4;
     int ctr = 0;
-	double transparency = 0;
-
-
     public void initialize(SEResourceCache rsc) {
         base.initialize(rsc);
-
         add_sprite_for_color(Color.instance("red"), get_scene_width(),get_scene_height());
-
         rsc.prepare_image("d", "desert", get_scene_width()*0.5,get_scene_height()*0.5);
         rsc.prepare_image("j", "koala", get_scene_width()*0.5,get_scene_height()*0.5);
         rsc.prepare_image("p", "lighthouse", get_scene_width()*0.5,get_scene_height()*0.5);
         rsc.prepare_image("t", "penguin", get_scene_width()*0.5,get_scene_height()*0.5);
-
         rsc.prepare_font("myfont","arial bold color=white",40);
-
         image1 = add_sprite_for_image(SEImage.for_resource("d"));
         image2 = add_sprite_for_image(SEImage.for_resource("j"));
         image3 = add_sprite_for_image(SEImage.for_resource("p"));
         image4 = add_sprite_for_image(SEImage.for_resource("t"));
-
         image1.move(0,0);
         image2.move(get_scene_width()*0.5,0);
         image3.move(0,get_scene_height()*0.5);
         image4.move(get_scene_width()*0.5,get_scene_height()*0.5);
-
         text1 = "Desert";
         text2 = "Koala";
         text3 = "Lighthouse";
         text4 = "Penguin";
-
-        textlabel1 = add_sprite_for_text(text1,"myfont");
-        textlabel2 = add_sprite_for_text(text2,"myfont");
-        textlabel3 = add_sprite_for_text(text3,"myfont");
-        textlabel4 = add_sprite_for_text(text4,"myfont");
-
-        textlabel1.move(get_scene_width()*0.25,get_scene_height()*0.25);
-        textlabel2.move(get_scene_width()*0.75,get_scene_height()*0.25);
-        textlabel3.move(get_scene_width()*0.25,get_scene_height()*0.75);
-        textlabel4.move(get_scene_width()*0.75,get_scene_height()*0.75);
+        textlabel1 = add_sprite_for_text("","myfont");
+        image1.set_alpha(0);
+        image2.set_alpha(0);
+        image3.set_alpha(0);
+        image4.set_alpha(0);
     }
-
     public void on_key_press(String name, String str) {
         
     }
-
     public void on_key_release(String name, String str) {
-   
-    }
 
+        
+    }
     public void on_pointer_press(SEPointerInfo pi) {
-        if(ctr%4==0){
-            image3.move(0,0);
-            image1.move(get_scene_width()*0.5,0);
-            image4.move(0,get_scene_height()*0.5);
-            image2.move(get_scene_width()*0.5,get_scene_height()*0.5);
-            textlabel3.move(get_scene_width()*0.25,get_scene_height()*0.25);
-            textlabel1.move(get_scene_width()*0.75,get_scene_height()*0.25);
-            textlabel4.move(get_scene_width()*0.25,get_scene_height()*0.75);
-            textlabel2.move(get_scene_width()*0.75,get_scene_height()*0.75);
-			image1.set_alpha(0.5);
-			image2.set_alpha(1);
-			image3.set_alpha(1);
-			image4.set_alpha(1);
-        }
-        else if(ctr%4==1) {
-            image4.move(0,0);
-            image3.move(get_scene_width()*0.5,0);
-            image2.move(0,get_scene_height()*0.5);
-            image1.move(get_scene_width()*0.5,get_scene_height()*0.5);
-            textlabel4.move(get_scene_width()*0.25,get_scene_height()*0.25);
-            textlabel3.move(get_scene_width()*0.75,get_scene_height()*0.25);
-            textlabel2.move(get_scene_width()*0.25,get_scene_height()*0.75);
-            textlabel1.move(get_scene_width()*0.75,get_scene_height()*0.75);
-			image1.set_alpha(1);
-			image2.set_alpha(0.5);
-			image3.set_alpha(1);
-			image4.set_alpha(1);
-        }
-        else if(ctr%4==2) {
-            image2.move(0,0);
-            image4.move(get_scene_width()*0.5,0);
-            image1.move(0,get_scene_height()*0.5);
-            image3.move(get_scene_width()*0.5,get_scene_height()*0.5);
-            textlabel2.move(get_scene_width()*0.25,get_scene_height()*0.25);
-            textlabel4.move(get_scene_width()*0.75,get_scene_height()*0.25);
-            textlabel1.move(get_scene_width()*0.25,get_scene_height()*0.75);
-            textlabel3.move(get_scene_width()*0.75,get_scene_height()*0.75);
-			image1.set_alpha(1);
-			image2.set_alpha(1);
-			image3.set_alpha(0.5);
-			image4.set_alpha(1);
-        }
-        else if(ctr%4==3){
-            image1.move(0,0);
-            image2.move(get_scene_width()*0.5,0);
-            image3.move(0,get_scene_height()*0.5);
-            image4.move(get_scene_width()*0.5,get_scene_height()*0.5);
+        if(pi.is_inside(0,0,get_scene_width()*0.5,get_scene_height()*0.5)){
+            textlabel1.set_text(text1);
             textlabel1.move(get_scene_width()*0.25,get_scene_height()*0.25);
-            textlabel2.move(get_scene_width()*0.75,get_scene_height()*0.25);
-            textlabel3.move(get_scene_width()*0.25,get_scene_height()*0.75);
-            textlabel4.move(get_scene_width()*0.75,get_scene_height()*0.75);
-			image1.set_alpha(1);
-			image2.set_alpha(1);
-			image3.set_alpha(1);
-			image4.set_alpha(0.5);
+            image1.set_alpha(0.5);
+       	 image2.set_alpha(1);
+       	 image3.set_alpha(1);
+        	image4.set_alpha(1);
         }
-        ctr++;
+        else if(pi.is_inside(get_scene_width()*0.5,0,get_scene_width(),get_scene_height()*0.5)) {
+            textlabel1.set_text(text2);
+            textlabel1.move(get_scene_width()*0.75,get_scene_height()*0.25);
+            image2.set_alpha(0.5);
+      	  image1.set_alpha(1);
+      	  image3.set_alpha(1);
+      	  image4.set_alpha(1);
+        }
+        else if(pi.is_inside(0,get_scene_height()*0.5,get_scene_width()*0.5,get_scene_height())) {
+            textlabel1.set_text(text3);
+            textlabel1.move(get_scene_width()*0.25,get_scene_height()*0.75);
+            image3.set_alpha(0.5);
+       	 image2.set_alpha(1);
+      	  image1.set_alpha(1);
+      	  image4.set_alpha(1);
+        }
+        else if(pi.is_inside(get_scene_width()*0.5,get_scene_height()*0.5,get_scene_width(),get_scene_height())){
+            textlabel1.set_text(text4);
+            textlabel1.move(get_scene_width()*0.75,get_scene_height()*0.75);
+            image4.set_alpha(0.5);
+     	   image2.set_alpha(1);
+    	    image3.set_alpha(1);
+   	     image1.set_alpha(1);
+        }
     }
-
-	public void set_alpha(double alpha) {
-		
-	}
-
+   // public void on_pointer_release(SEPointerInfo pi) {
+   //     textlabel1.set_text("");
+   //     image1.set_alpha(1);
+   //     image2.set_alpha(1);
+   //     image3.set_alpha(1);
+   //     image4.set_alpha(1);
+   // }
 }
